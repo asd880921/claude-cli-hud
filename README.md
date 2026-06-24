@@ -36,13 +36,14 @@
 
 4. 重啟 Claude Code 或開新 session。
 
-> 第二行要**對話開始、有資料後**才出現;`5h` / `7d` / 重置時間另需 **Claude.ai 訂閱**。
+> 第二行要**對話開始、有資料後**才會顯示；`5h` / `7d` / 重置時間 三個項目另需 **Claude.ai 訂閱** 才會正常顯示。
 
 ## 自訂
 
-全部邏輯在 `statusline-command.js`:**顏色**(`c` 物件 / `pctColor()`)、**圖示**(`ic` 物件)、**進度條**(`makeBar()`)、**版面**(`line1` / `line2`)。
+全部邏輯在 `statusline-command.js`
+- **顏色** (`c` 物件 / `pctColor()`)
+- **圖示** (`ic` 物件)、**進度條**(`makeBar()`)
+- **版面** (`line1` / `line2`)。
 
 ## 備註
-
-- 改了專案裡的腳本記得**重新複製到 `~/.claude\`**(兩份各自獨立)。
 - 腳本從 stdin 讀 Claude Code 的狀態列 JSON，欄位見 [官方文件](https://docs.claude.com/en/docs/claude-code/statusline)。
