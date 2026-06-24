@@ -5,29 +5,31 @@
  * context usage, and (when available) rate limit usage / reset time.
  * Styled with ANSI truecolor + Nerd Font icons (WezTerm-friendly).
  *
- * Set CLAUDE_HUD_PLAIN=1 (or CLAUDE_HUD_ASCII=1) to use a pure-ASCII fallback
- * for terminals without a Nerd Font (e.g. plain cmd.exe with Consolas).
+ * Nerd Font glyphs in WezTerm; every other terminal falls back to plain text.
  */
 
 const { execSync } = require('child_process');
 
-// Emoji fallback for terminals without a Nerd Font (e.g. cmd / Windows Terminal).
-const PLAIN =
-  process.env.CLAUDE_HUD_PLAIN === '1' || process.env.CLAUDE_HUD_ASCII === '1';
+// A process can't read the terminal's font, so we key off the terminal program:
+// Nerd Font glyphs in WezTerm, plain text symbols everywhere else.
+const PLAIN = !(
+  process.env.TERM_PROGRAM === 'WezTerm' ||
+  process.env.WEZTERM_PANE !== undefined
+);
 
-// Icons: Nerd Font glyph (default) vs. emoji (PLAIN fallback).
+// Icons: Nerd Font glyph (rich) vs. monochrome text symbol (PLAIN fallback).
 const ic = {
-  dir: PLAIN ? '' : '',
-  branch: PLAIN ? '' : '',
-  model: PLAIN ? '' : '',
-  effort: PLAIN ? '' : '',
-  ctx: PLAIN ? '' : '',
-  reset: PLAIN ? '⏱ ' : '  ',
+  dir: PLAIN ? '▸' : '',
+  branch: PLAIN ? '⑂' : '',
+  model: PLAIN ? '◆' : '',
+  effort: PLAIN ? '▲' : '',
+  ctx: PLAIN ? '▤' : '',
+  reset: PLAIN ? '↻ ' : '  ',
 };
 const SEP_CH = '│';
 const BAR = { fill: '▮', empty: '▯' };
 
-// Nerd Font glyphs get two trailing spaces; emoji (double-width) need only one.
+// Nerd Font glyphs get two trailing spaces; plain text symbols need only one.
 const lead = (icon) => (icon ? (PLAIN ? `${icon} ` : `${icon}  `) : '');
 
 // --- ANSI helpers ---------------------------------------------------------
@@ -124,7 +126,7 @@ process.stdin.on('end', () => {
   // Context window usage (shown once data is available)
   const used = input.context_window?.used_percentage;
   if (used !== null && used !== undefined) {
-    line2.push(usage(`${lead(ic.ctx)}ctx`, Math.round(used)));
+    line2.push(usage(`${lead(ic.ctx)}context`, Math.round(used)));
   }
 
   // Rate limits (only if exposed by Claude Code)
