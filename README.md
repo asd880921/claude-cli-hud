@@ -15,28 +15,28 @@
 
 ## 安裝步驟
 
-1. 取得專案
+1. 下載專案至 `~/.claude/` (Windows 為 `C:\Users\<你>\.claude\`)
     - 使用 Git Clone：
       ```bash
       git clone https://github.com/asd880921/claude-cli-hud.git
       ```
-    - 在 GitHub 頁面找到 **Code → Download ZIP** 下載並解壓縮。 
+    - 在 GitHub 頁面找到 **Code → Download ZIP** 下載並解壓縮至 `~/.claude/` 底下。 
 
-2. 把 `statusline-command.js` 複製到 `~/.claude/`(Windows 為 `C:\Users\<你>\.claude\`)。
-3. 在 `~/.claude/settings.json` 加入(路徑改成自己的):
+2. 返回上一層找到 `settings.json` ( `~/.claude/settings.json`)  
+開啟加入以下內容，並將路徑指向專案的 `statusline-command.js`)：
 
    ```json
    {
      "statusLine": {
        "type": "command",
-       "command": "node \"C:/Users/<你>/.claude/statusline-command.js\""
+       "command": "node \"C:/Users/<你>/.claude/claude-cli-hud/statusline-command.js\""
      }
    }
    ```
 
-4. 重啟 Claude Code 或開新 session。
+3. 重啟 Claude Code 或開新 session。
 
-> 第二行要**對話開始、有資料後**才會顯示；`5h` / `7d` / 重置時間 三個項目另需 **Claude.ai 訂閱** 才會正常顯示。
+> Hud 的第二行狀態需要 **對話開始** 才能取得資料顯示；`5h` / `7d` / 重置時間 三個項目另需 **Claude.ai 訂閱** 才會正常顯示。
 
 ## 自訂
 
