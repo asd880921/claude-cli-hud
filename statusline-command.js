@@ -140,13 +140,9 @@ process.stdin.on('end', () => {
     line2.push(usage('7d', Math.round(sevenDay.used_percentage)));
   }
 
-  // Reset time (prefer the soonest reset among available windows)
-  const resets = [fiveHour?.resets_at, sevenDay?.resets_at].filter(
-    (t) => typeof t === 'number'
-  );
-  if (resets.length) {
-    const soonest = Math.min(...resets);
-    const resetDate = new Date(soonest * 1000);
+  // Reset time (5-hour window only)
+  if (typeof fiveHour?.resets_at === 'number') {
+    const resetDate = new Date(fiveHour.resets_at * 1000);
     const hh = String(resetDate.getHours()).padStart(2, '0');
     const mm = String(resetDate.getMinutes()).padStart(2, '0');
     line2.push(paint(c.label, `${ic.reset}${hh}:${mm}`));
