@@ -23,7 +23,7 @@
     - 在 GitHub 頁面找到 **Code → Download ZIP** 下載並解壓縮至 `~/.claude/` 底下。 
 
 2. 返回上一層找到 `settings.json` ( `~/.claude/settings.json`)  
-開啟加入以下內容，並將路徑指向專案的 `statusline-command.js`)：
+開啟加入以下內容，並將路徑指向專案的 `statusline-command.js`：
 
    ```json
    {
@@ -36,7 +36,8 @@
 
 3. 重啟 Claude Code 或開新 session。
 
-> Hud 的第二行狀態需要 **對話開始** 才能取得資料顯示；`5h` / `7d` / 重置時間(5h limit) 三個項目另需 **Claude.ai 訂閱** 才會正常顯示。
+> Hud 的第二行狀態需要 **對話開始** 才能取得資料顯示；  
+> `5h` / `7d` / 重置時間(5h limit) 三個項目另需 **Claude.ai 訂閱** 才會正常顯示。
 
 ## 自訂
 
